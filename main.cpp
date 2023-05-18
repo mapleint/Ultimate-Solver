@@ -18,7 +18,7 @@ struct piece {
 };
 int sol = 0;
 void solve(std::vector<piece> a, std::vector<piece> s) {
-    
+    /*if no pieces are avaliable, we won*/
     if (a.size() < 1){
         for(int i = 0; i < 16; i++)
             printf("index %i, top is %i + ", s[i].i, s[i].t);
@@ -28,6 +28,7 @@ void solve(std::vector<piece> a, std::vector<piece> s) {
         }
     std::vector<piece> f;
     std::vector<int> l;
+    /* go through all unused pieces, see if they would fit, if so add them to 'fit' vector*/
     for (int i = 0; i < a.size(); i++) {
         auto t = a[i];
         bool left = s.size() % 4 == 0 ? true : (-t.l == s.back().r);
@@ -47,7 +48,7 @@ void solve(std::vector<piece> a, std::vector<piece> s) {
             l.push_back(i);
         }
     }
-
+    /*call solve with every fitting piece*/
     for (int j = 0; j < f.size(); j++) {
         std::vector<piece> at, as;
         at = a;
@@ -85,6 +86,7 @@ int main()
     piece(4, 1, -1, -2, 16) };
 
     for (int i = 0; i < 16; i++) {
+        // a = avaliable, s = solution vectors
         std::vector<piece> a = p;
         std::vector<piece> s; 
         s.push_back(p[i]);
